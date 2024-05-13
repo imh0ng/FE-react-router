@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const data = {
     "맘스터치": {
@@ -26,8 +27,28 @@ const data = {
 
 const Product = () => {
 
+    const { brandInput } = useParams();
+
+    let matchBrand = "";
+
+    for ( const key in data) {
+        if (brandInput === key) {
+            matchBrand = key;
+        }
+    }
+    
+
     return (
         <>
+            {matchBrand ?
+                <>
+                    <h1>{matchBrand}</h1>
+                    <p>{data[matchBrand].title}</p>
+                    <p>{data[matchBrand].price}</p>
+                </> :
+                <p>해당 브랜드의 제품을 찾을 수 없습니다.</p>
+            }
+            
         </>
     )
 }
